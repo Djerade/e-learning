@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'channels',
     
     # Local apps
     'users',
@@ -168,11 +167,15 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-# Nouvelle configuration django-allauth
+# django-allauth settings
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_ADAPTER = 'users.adapters.CustomAccountAdapter'
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.CustomSignupForm',
+}
 
 # Email configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
