@@ -9,16 +9,18 @@ from django.conf import settings
 
 # Create your views here.
 
-@login_required
+# @login_required
 def chat_view(request):
-    messages = ChatMessage.objects.filter(user=request.user).order_by('-created_at')[:10]
+    # messages = ChatMessage.objects.filter(user=request.user).order_by('-created_at')[:10]
+    messages = [{"message": "Bienvenue !", "response": "Comment puis-je vous aider ?"}]
     return render(request, 'chatbot/chat.html', {'messages': messages})
 
-@login_required
-@require_POST
-@csrf_exempt
+# @login_required
+# @require_POST
+# @csrf_exempt
 def send_message(request):
     message = request.POST.get('message')
+    print(message)
     if not message:
         return JsonResponse({'error': 'Message vide'}, status=400)
     
