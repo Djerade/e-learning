@@ -5,7 +5,7 @@ import os
 import logging
 
 # Configurez votre clé API OpenAI
-# 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
+
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 logger = logging.getLogger(__name__)
