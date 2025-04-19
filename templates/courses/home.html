@@ -3,7 +3,7 @@ Plateforme d'E-learning{% endblock %} {% block content %}
 <div class="bg-gray-50">
   <!-- Hero Section -->
   <div
-    class="relative bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"
+    class="relative bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 h-screen"
   >
     <div class="absolute inset-0">
       <img
@@ -13,28 +13,28 @@ Plateforme d'E-learning{% endblock %} {% block content %}
       />
     </div>
     <div
-      class="relative max-w-7xl mx-auto py-24 px-6 sm:py-32 sm:px-8 lg:px-10"
+      class="relative max-w-7xl mx-auto py-32 px-6 sm:py-40 sm:px-8 lg:px-10"
     >
       <div class="text-center">
         <h1
-          class="text-6xl font-extrabold tracking-tight text-white sm:text-7xl lg:text-8xl drop-shadow-lg"
+          class="text-7xl font-extrabold tracking-tight text-white sm:text-8xl lg:text-9xl drop-shadow-lg"
         >
           Transformez votre avenir
         </h1>
-        <p class="mt-8 text-xl text-pink-100 max-w-3xl mx-auto">
+        <p class="mt-10 text-2xl text-pink-100 max-w-4xl mx-auto">
           Accédez à des cours de qualité, apprenez avec des experts et obtenez
           des certifications reconnues.
         </p>
-        <div class="mt-12 flex justify-center space-x-4">
+        <div class="mt-16 flex justify-center space-x-6">
           <a
             href="#courses"
-            class="px-8 py-4 text-lg font-medium text-white bg-pink-600 rounded-lg shadow-lg hover:bg-pink-700"
+            class="px-10 py-5 text-xl font-medium text-white bg-pink-600 rounded-lg shadow-lg hover:bg-pink-700"
           >
             Explorer les cours
           </a>
           <a
             href="#about"
-            class="px-8 py-4 text-lg font-medium text-pink-600 bg-white rounded-lg shadow-lg hover:bg-gray-100"
+            class="px-10 py-5 text-xl font-medium text-pink-600 bg-white rounded-lg shadow-lg hover:bg-gray-100"
           >
             En savoir plus
           </a>
@@ -65,8 +65,8 @@ Plateforme d'E-learning{% endblock %} {% block content %}
           {% if course.thumbnail %}
           <img
             class="absolute inset-0 h-full w-full object-cover"
-            src="{{ course.thumbnail.url }}"
-            alt="{{ course.title }}"
+            src="course.thumbnail.url "
+            alt="course.title "
           />
           {% else %}
           <div
@@ -88,9 +88,7 @@ Plateforme d'E-learning{% endblock %} {% block content %}
             {{ course.description|truncatewords:20 }}
           </p>
           <div class="mt-6 flex items-center justify-between">
-            <span class="text-lg font-bold text-gray-900"
-              >{{ course.price }} €</span
-            >
+            <span class="text-lg font-bold text-gray-900"> course.price €</span>
             <a
               href="{% url 'courses:course_detail' course.id %}"
               class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
