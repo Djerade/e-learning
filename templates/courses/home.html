@@ -63,8 +63,8 @@ Plateforme TechEduc{% endblock %} {% block content %}
           {% if course.thumbnail %}
           <img
             class="absolute inset-0 h-full w-full object-cover"
-            src="course.thumbnail.url "
-            alt="course.title "
+            src="{{ course.thumbnail.url }}"
+            alt="{{ course.title }}"
           />
           {% else %}
           <div
