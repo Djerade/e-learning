@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mx-auto py-8">
+  <h1 class="text-2xl font-bold mb-4">Mon Profil</h1>
+
+  <h2 class="text-xl font-semibold">Mes inscriptions</h2>
+  <ul>
+    {% for enrollment in enrollments %}
+    <li>{{ enrollment.course.title }}</li>
+    {% empty %}
+    <li>Vous n'êtes inscrit à aucun cours.</li>
+    {% endfor %}
+  </ul>
+
+  <h2 class="text-xl font-semibold mt-6">Mes certificats</h2>
+  <ul>
+    {% for certificate in certificates %}
+    <li>{{ certificate.course.title }}</li>
+    {% empty %}
+    <li>Vous n'avez obtenu aucun certificat.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
