@@ -1,0 +1,206 @@
+{% extends "base.html" %} {% load static %} {% block title %}Accueil -
+Plateforme d'E-learning{% endblock %} {% block content %}
+<div class="bg-gray-50">
+  <!-- Hero Section -->
+  <div
+    class="relative bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"
+  >
+    <div class="absolute inset-0">
+      <img
+        class="w-full h-full object-cover opacity-30"
+        src="{% static 'images/hero-background.jpg' %}"
+        alt="Hero Background"
+      />
+    </div>
+    <div
+      class="relative max-w-7xl mx-auto py-24 px-6 sm:py-32 sm:px-8 lg:px-10"
+    >
+      <div class="text-center">
+        <h1
+          class="text-6xl font-extrabold tracking-tight text-white sm:text-7xl lg:text-8xl drop-shadow-lg"
+        >
+          Transformez votre avenir
+        </h1>
+        <p class="mt-8 text-xl text-pink-100 max-w-3xl mx-auto">
+          Accédez à des cours de qualité, apprenez avec des experts et obtenez
+          des certifications reconnues.
+        </p>
+        <div class="mt-12 flex justify-center space-x-4">
+          <a
+            href="#courses"
+            class="px-8 py-4 text-lg font-medium text-white bg-pink-600 rounded-lg shadow-lg hover:bg-pink-700"
+          >
+            Explorer les cours
+          </a>
+          <a
+            href="#about"
+            class="px-8 py-4 text-lg font-medium text-pink-600 bg-white rounded-lg shadow-lg hover:bg-gray-100"
+          >
+            En savoir plus
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Courses Section -->
+  <div
+    id="courses"
+    class="max-w-7xl mx-auto py-20 px-6 sm:py-24 sm:px-8 lg:px-10"
+  >
+    <div class="text-center">
+      <h2 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+        Nos cours populaires
+      </h2>
+      <p class="mt-6 text-lg text-gray-600">
+        Explorez notre catalogue de cours et commencez votre apprentissage dès
+        aujourd'hui.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      {% for course in courses %}
+      <div class="bg-white overflow-hidden shadow-lg rounded-lg">
+        <div class="relative pb-56 overflow-hidden">
+          {% if course.thumbnail %}
+          <img
+            class="absolute inset-0 h-full w-full object-cover"
+            src="{{ course.thumbnail.url }}"
+            alt="{{ course.title }}"
+          />
+          {% else %}
+          <div
+            class="absolute inset-0 bg-gray-200 flex items-center justify-center"
+          >
+            <span class="text-gray-400">Image non disponible</span>
+          </div>
+          {% endif %}
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-900">
+            {{ course.title }}
+          </h3>
+          <p class="mt-4 text-sm text-gray-600">
+            Par {{
+            course.instructor.get_full_name|default:course.instructor.email }}
+          </p>
+          <p class="mt-4 text-sm text-gray-600">
+            {{ course.description|truncatewords:20 }}
+          </p>
+          <div class="mt-6 flex items-center justify-between">
+            <span class="text-lg font-bold text-gray-900"
+              >{{ course.price }} €</span
+            >
+            <a
+              href="{% url 'courses:course_detail' course.id %}"
+              class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+            >
+              Voir le cours
+            </a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-span-3 text-center py-12">
+        <p class="text-gray-500">Aucun cours disponible pour le moment.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="bg-white">
+    <div class="max-w-7xl mx-auto py-20 px-6 sm:py-24 sm:px-8 lg:px-10">
+      <div class="text-center">
+        <h2 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+          Pourquoi choisir notre plateforme ?
+        </h2>
+      </div>
+      <div class="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-blue-500 rounded-md p-4">
+              <svg
+                class="h-8 w-8 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-lg font-medium text-gray-900">
+                Apprentissage flexible
+              </h3>
+              <p class="mt-2 text-sm text-gray-600">
+                Apprenez à votre rythme, où et quand vous voulez.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-blue-500 rounded-md p-4">
+              <svg
+                class="h-8 w-8 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                />
+              </svg>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-lg font-medium text-gray-900">
+                Contenu de qualité
+              </h3>
+              <p class="mt-2 text-sm text-gray-600">
+                Des cours créés par des experts dans leur domaine.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-blue-500 rounded-md p-4">
+              <svg
+                class="h-8 w-8 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-lg font-medium text-gray-900">Certification</h3>
+              <p class="mt-2 text-sm text-gray-600">
+                Obtenez des certificats reconnus à la fin de vos cours.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+[
+  {
+    "model": "courses.module",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "title": "Introduction à Python",
+      "description": "Découvrez les bases de la programmation Python",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 2,
+    "fields": {
+      "course": 1,
+      "title": "Structures de données",
+      "description": "Apprenez à manipuler les structures de données en Python",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 1,
+    "fields": {
+      "module": 1,
+      "title": "Installation et configuration",
+      "content": "Dans cette leçon, nous allons installer Python et configurer notre environnement de développement.",
+      "video_url": "https://example.com/video1",
+      "order": 1,
+      "duration": "1800"
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 2,
+    "fields": {
+      "module": 1,
+      "title": "Variables et types de données",
+      "content": "Découvrez les différents types de données en Python et comment les utiliser.",
+      "video_url": "https://example.com/video2",
+      "order": 2,
+      "duration": "2400"
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 3,
+    "fields": {
+      "module": 2,
+      "title": "Listes et tuples",
+      "content": "Apprenez à utiliser les listes et les tuples en Python.",
+      "video_url": "https://example.com/video3",
+      "order": 1,
+      "duration": "2700"
+    }
+  },
+  {
+    "model": "courses.lesson",
+    "pk": 4,
+    "fields": {
+      "module": 2,
+      "title": "Dictionnaires et ensembles",
+      "content": "Découvrez les dictionnaires et les ensembles en Python.",
+      "video_url": "https://example.com/video4",
+      "order": 2,
+      "duration": "3000"
+    }
+  }
+]

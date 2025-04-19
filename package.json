@@ -1,0 +1,25 @@
+{
+  "name": "e-learning",
+  "version": "1.0.0",
+  "description": "Une plateforme d'apprentissage en ligne moderne construite avec Django et Tailwind CSS, offrant des cours en ligne, un chatbot IA et des certificats de formation.",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css",
+    "watch": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Djerade/e-learning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Djerade/e-learning/issues"
+  },
+  "homepage": "https://github.com/Djerade/e-learning#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

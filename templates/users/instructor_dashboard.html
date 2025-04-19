@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Tableau de bord
+instructeur{% endblock %} {% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8">Tableau de bord instructeur</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Mes cours -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4">Mes cours</h2>
+      {% if courses %}
+      <ul class="space-y-2">
+        {% for course in courses %}
+        <li class="border-b pb-2">
+          <a
+            href="{% url 'courses:course_detail' course.id %}"
+            class="text-blue-600 hover:text-blue-800"
+          >
+            {{ course.title }}
+          </a>
+          <div class="text-sm text-gray-600">
+            {{ course.enrollments.count }} étudiants inscrits
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-gray-600">Vous n'avez pas encore créé de cours.</p>
+      {% endif %}
+      <a
+        href="{% url 'courses:course_create' %}"
+        class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        Créer un nouveau cours
+      </a>
+    </div>
+
+    <!-- Statistiques -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4">Statistiques</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-medium">Nombre total d'étudiants</h3>
+          <p class="text-2xl font-bold">{{ total_students }}</p>
+        </div>
+        <div>
+          <h3 class="font-medium">Cours les plus populaires</h3>
+          <ul class="mt-2 space-y-2">
+            {% for course in popular_courses %}
+            <li class="text-sm">
+              {{ course.title }} ({{ course.enrollments.count }} étudiants)
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mon profil -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4">Mon profil</h2>
+      <div class="space-y-2">
+        <p><strong>Nom:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        {% if user.bio %}
+        <p><strong>Bio:</strong> {{ user.bio }}</p>
+        {% endif %}
+      </div>
+      <a
+        href="{% url 'users:edit_profile' %}"
+        class="mt-4 inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
+      >
+        Modifier mon profil
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

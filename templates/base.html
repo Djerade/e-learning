@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Plateforme TechEduc{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #2563eb;
+        --background: #f9fafb;
+        --text-dark: #111827;
+        --text-light: #6b7280;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--background);
+        color: var(--text-dark);
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        z-index: 50;
+        padding: 1rem 0; /* Ajout d'espace vertical */
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: auto; /* Ajustement pour plus de flexibilité */
+      }
+
+      .nav-link {
+        color: var(--text-light);
+        margin-left: 1.5rem; /* Augmentation de l'espacement */
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+
+      .nav-link:hover {
+        color: var(--primary);
+      }
+
+      .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background-color 0.2s;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #1e40af;
+      }
+
+      main {
+        padding-top: 6rem; /* Augmentation de l'espace sous le header */
+        margin-bottom: 2rem; /* Ajout d'espace avant le footer */
+      }
+
+      footer {
+        background-color: white;
+        padding: 3rem 0; /* Augmentation de l'espace vertical */
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--text-light);
+        border-top: 1px solid #e5e7eb;
+        margin-top: 2rem; /* Ajout d'espace au-dessus du footer */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <a href="{% url 'home' %}" class="text-xl font-bold text-primary">
+            TechEduc
+          </a>
+          <div>
+            <a href="{% url 'home' %}" class="nav-link">Accueil</a>
+            <a href="{% url 'courses:course_list' %}" class="nav-link"
+              >Formations</a
+            >
+            <a href="{% url 'courses:course_list' %}" class="nav-link"
+              >ChatBox AI</a
+            >
+            {% if user.is_authenticated %}
+            <a href="{% url 'users:profile' %}" class="btn btn-primary"
+              >Profil</a
+            >
+            {% else %}
+            <a href="{% url 'account_login' %}" class="btn btn-primary"
+              >Se connecter</a
+            >
+            {% endif %}
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">{% block content %} {% endblock %}</main>
+
+    <footer>&copy; 2025 Plateforme TechEduc. Tous droits réservés.</footer>
+  </body>
+</html>
