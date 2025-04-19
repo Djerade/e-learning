@@ -9,7 +9,7 @@ class Course(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     thumbnail = models.ImageField(upload_to='course_thumbnails/')
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    duration = models.DurationField()
+    duration = models.DurationField(null=True)
     level = models.CharField(max_length=50, choices=[
         ('beginner', 'Débutant'),
         ('intermediate', 'Intermédiaire'),

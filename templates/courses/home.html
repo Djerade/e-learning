@@ -2,8 +2,9 @@
 Plateforme d'E-learning{% endblock %} {% block content %}
 <div class="bg-gray-50">
   <!-- Hero Section -->
+
   <div
-    class="relative bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"
+    class="relative bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 pt-9 h-screen"
   >
     <div class="absolute inset-0">
       <img
@@ -12,38 +13,27 @@ Plateforme d'E-learning{% endblock %} {% block content %}
         alt="Hero Background"
       />
     </div>
-    <div
-      class="relative max-w-7xl mx-auto py-24 px-6 sm:py-32 sm:px-8 lg:px-10"
-    >
-      <div class="text-center">
-        <h1
-          class="text-6xl font-extrabold tracking-tight text-white sm:text-7xl lg:text-8xl drop-shadow-lg"
-        >
-          Transformez votre avenir
+    <div class="hero-section container mx-auto px-4 py-16 md:py-24">
+      <div class="max-w-lg mt-11">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          Bienvenue sur notre plateforme
         </h1>
-        <p class="mt-8 text-xl text-pink-100 max-w-3xl mx-auto">
-          Accédez à des cours de qualité, apprenez avec des experts et obtenez
-          des certifications reconnues.
+        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+          Utilisez l'intelligence artificielle pour se former dans des domaines
+          émergents et découvrir des opportunités d'emploi.
         </p>
-        <div class="mt-12 flex justify-center space-x-4">
-          <a
-            href="#courses"
-            class="px-8 py-4 text-lg font-medium text-white bg-pink-600 rounded-lg shadow-lg hover:bg-pink-700"
-          >
-            Explorer les cours
-          </a>
-          <a
-            href="#about"
-            class="px-8 py-4 text-lg font-medium text-pink-600 bg-white rounded-lg shadow-lg hover:bg-gray-100"
-          >
-            En savoir plus
-          </a>
-        </div>
+        <a
+          href="{% url 'courses:course_list' %}"
+          class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-3 rounded-md transition-colors duration-300"
+        >
+          Explorer les Formations
+        </a>
       </div>
     </div>
   </div>
 
   <!-- Featured Courses Section -->
+
   <div
     id="courses"
     class="max-w-7xl mx-auto py-20 px-6 sm:py-24 sm:px-8 lg:px-10"
@@ -65,8 +55,8 @@ Plateforme d'E-learning{% endblock %} {% block content %}
           {% if course.thumbnail %}
           <img
             class="absolute inset-0 h-full w-full object-cover"
-            src="{{ course.thumbnail.url }}"
-            alt="{{ course.title }}"
+            src="course.thumbnail.url "
+            alt="course.title "
           />
           {% else %}
           <div
@@ -80,16 +70,15 @@ Plateforme d'E-learning{% endblock %} {% block content %}
           <h3 class="text-xl font-semibold text-gray-900">
             {{ course.title }}
           </h3>
-          <p class="mt-4 text-sm text-gray-600">
-            Par {{
-            course.instructor.get_full_name|default:course.instructor.email }}
-          </p>
+          {% comment %}
+          <p class="mt-4 text-sm text-gray-600">{{ course.level }}</p>
+          {% endcomment %}
           <p class="mt-4 text-sm text-gray-600">
             {{ course.description|truncatewords:20 }}
           </p>
           <div class="mt-6 flex items-center justify-between">
             <span class="text-lg font-bold text-gray-900"
-              >{{ course.price }} €</span
+              >{{ course.price}} €</span
             >
             <a
               href="{% url 'courses:course_detail' course.id %}"
@@ -109,19 +98,29 @@ Plateforme d'E-learning{% endblock %} {% block content %}
   </div>
 
   <!-- Features Section -->
-  <div class="bg-white">
-    <div class="max-w-7xl mx-auto py-20 px-6 sm:py-24 sm:px-8 lg:px-10">
-      <div class="text-center">
-        <h2 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+
+  <!-- Section Features -->
+  <section class="bg-gray-50 py-16 md:py-24">
+    <div class="container mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl font-bold text-gray-900">
           Pourquoi choisir notre plateforme ?
         </h2>
+        <p class="mt-4 text-gray-600">
+          Découvrez les avantages uniques que nous offrons pour votre
+          apprentissage.
+        </p>
       </div>
-      <div class="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="bg-gray-50 p-8 rounded-lg shadow-md">
-          <div class="flex items-center">
-            <div class="flex-shrink-0 bg-blue-500 rounded-md p-4">
+
+      <div class="grid gap-8 md:grid-cols-3">
+        <!-- Feature 1 -->
+        <div
+          class="bg-white p-6 rounded-lg shadow-sm hover:shadow transition-shadow duration-300"
+        >
+          <div class="flex items-start">
+            <div class="bg-blue-500 rounded p-3 text-white">
               <svg
-                class="h-8 w-8 text-white"
+                class="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -135,21 +134,26 @@ Plateforme d'E-learning{% endblock %} {% block content %}
                 />
               </svg>
             </div>
-            <div class="ml-6">
+
+            <div class="ml-4">
               <h3 class="text-lg font-medium text-gray-900">
                 Apprentissage flexible
               </h3>
-              <p class="mt-2 text-sm text-gray-600">
+              <p class="mt-2 text-gray-600">
                 Apprenez à votre rythme, où et quand vous voulez.
               </p>
             </div>
           </div>
         </div>
-        <div class="bg-gray-50 p-8 rounded-lg shadow-md">
-          <div class="flex items-center">
-            <div class="flex-shrink-0 bg-blue-500 rounded-md p-4">
+
+        <!-- Feature 2 -->
+        <div
+          class="bg-white p-6 rounded-lg shadow-sm hover:shadow transition-shadow duration-300"
+        >
+          <div class="flex items-start">
+            <div class="bg-green-500 rounded p-3 text-white">
               <svg
-                class="h-8 w-8 text-white"
+                class="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -163,21 +167,26 @@ Plateforme d'E-learning{% endblock %} {% block content %}
                 />
               </svg>
             </div>
-            <div class="ml-6">
+
+            <div class="ml-4">
               <h3 class="text-lg font-medium text-gray-900">
                 Contenu de qualité
               </h3>
-              <p class="mt-2 text-sm text-gray-600">
+              <p class="mt-2 text-gray-600">
                 Des cours créés par des experts dans leur domaine.
               </p>
             </div>
           </div>
         </div>
-        <div class="bg-gray-50 p-8 rounded-lg shadow-md">
-          <div class="flex items-center">
-            <div class="flex-shrink-0 bg-blue-500 rounded-md p-4">
+
+        <!-- Feature 3 -->
+        <div
+          class="bg-white p-6 rounded-lg shadow-sm hover:shadow transition-shadow duration-300"
+        >
+          <div class="flex items-start">
+            <div class="bg-red-500 rounded p-3 text-white">
               <svg
-                class="h-8 w-8 text-white"
+                class="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -191,9 +200,10 @@ Plateforme d'E-learning{% endblock %} {% block content %}
                 />
               </svg>
             </div>
-            <div class="ml-6">
+
+            <div class="ml-4">
               <h3 class="text-lg font-medium text-gray-900">Certification</h3>
-              <p class="mt-2 text-sm text-gray-600">
+              <p class="mt-2 text-gray-600">
                 Obtenez des certificats reconnus à la fin de vos cours.
               </p>
             </div>
@@ -201,6 +211,6 @@ Plateforme d'E-learning{% endblock %} {% block content %}
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </div>
 {% endblock %}

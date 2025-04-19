@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% comment %} {% block title %}Créer un cours{%
+endblock %} {% endcomment %} {% block content %}
+<div class="container mx-auto py-8">
+  <h1 class="text-2xl font-bold mb-4">Créer un nouveau cours</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+      Créer
+    </button>
+  </form>
+</div>
+{% endblock %}

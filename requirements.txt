@@ -8,6 +8,7 @@ django-allauth==0.65.7
 django-channels==4.2.2
 channels-redis==4.2.1
 openai==1.75.0
+openai==0.28
 redis==5.2.1
 asgiref==3.8.1
 channels==4.2.2 

@@ -25,5 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('courses/', include('courses.urls')),
+    path('chatbot/', include('chatbot.urls', namespace='chatbot')),
+    path('users/', include('users.urls', namespace='users')),
     path('', course_list, name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

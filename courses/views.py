@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Course, Module, Lesson, Enrollment
+from .forms import CourseForm
 
 def home(request):
     courses = Course.objects.filter(is_published=True).order_by('-created_at')
@@ -64,3 +65,39 @@ def lesson_detail(request, course_id, module_id, lesson_id):
         'module': module,
         'lesson': lesson
     })
+
+@login_required
+def course_create(request):
+    if request.method == 'POST':
+        form = CourseForm(request.POST, request.FILES)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.instructor = request.user
+            course.save()
+            messages.success(request, 'Le cours a été créé avec succès.')
+            return redirect('courses:course_detail', course_id=course.id)
+    else:
+        form = CourseForm()
+    return render(request, 'courses/course_create.html', {'form': form})
+
+@login_required
+def course_update(request, course_id):
+    course = get_object_or_404(Course, id=course_id, instructor=request.user)
+    if request.method == 'POST':
+        form = CourseForm(request.POST, request.FILES, instance=course)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Le cours a été mis à jour avec succès.')
+            return redirect('courses:course_detail', course_id=course.id)
+    else:
+        form = CourseForm(instance=course)
+    return render(request, 'courses/course_update.html', {'form': form})
+
+@login_required
+def course_delete(request, course_id):
+    course = get_object_or_404(Course, id=course_id, instructor=request.user)
+    if request.method == 'POST':
+        course.delete()
+        messages.success(request, 'Le cours a été supprimé avec succès.')
+        return redirect('courses:course_list')
+    return render(request, 'courses/course_delete.html', {'course': course})
