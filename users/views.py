@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import ProfileForm
-from courses.models import Enrollment
+from courses.models import Enrollment, Course
 from certificates.models import Certificate
+from django.urls import reverse
 
 # Create your views here.
 
@@ -35,4 +36,32 @@ def dashboard(request):
     return render(request, 'users/dashboard.html', {
         'enrollments': enrollments,
         'certificates': certificates
+    })
+
+@login_required
+def dashboard_redirect(request):
+    if request.user.is_instructor:
+        return redirect('users:instructor_dashboard')
+    return redirect('users:student_dashboard')
+
+@login_required
+def student_dashboard(request):
+    enrollments = Enrollment.objects.filter(student=request.user).select_related('course')
+    certificates = Certificate.objects.filter(student=request.user).select_related('course')
+    
+    return render(request, 'users/student_dashboard.html', {
+        'enrollments': enrollments,
+        'certificates': certificates,
+    })
+
+@login_required
+def instructor_dashboard(request):
+    courses = Course.objects.filter(instructor=request.user)
+    total_students = Enrollment.objects.filter(course__in=courses).values('user').distinct().count()
+    popular_courses = courses.order_by('-enrollments__count')[:5]
+    
+    return render(request, 'users/instructor_dashboard.html', {
+        'courses': courses,
+        'total_students': total_students,
+        'popular_courses': popular_courses,
     })
