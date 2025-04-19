@@ -106,9 +106,7 @@
             <a href="{% url 'courses:course_list' %}" class="nav-link"
               >Formations</a
             >
-            <a href="{% url 'courses:course_list' %}" class="nav-link"
-              >ChatBox AI</a
-            >
+            <a href="{% url 'chatbot:chat' %}" class="nav-link">ChatBox AI</a>
             {% if user.is_authenticated %}
             <a href="{% url 'users:profile' %}" class="btn btn-primary"
               >Profil</a
